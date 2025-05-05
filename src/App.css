@@ -5,6 +5,18 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
+:root {
+  --background-dark: #101114;
+  --background-medium: #181a20;
+  --background-light: #21232c;
+  --primary-color: #f2d049;
+  --primary-dark: #e0b829;
+  --primary-light: rgba(242, 208, 73, 0.15);
+  --text-light: #ffffff;
+  --text-medium: #c0c2c5;
+  --text-muted: #7a7c85;
+}
+
 body {
   overflow-x: hidden;
 }

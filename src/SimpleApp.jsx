@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import styled from 'styled-components'
-import './App.css'
+import './index.css'
 import { FiMenu, FiX } from 'react-icons/fi'
 
 const words = ["Chat", "Fast", "Fied"];
 
-function App() {
+function SimpleApp() {
   const [currentWord, setCurrentWord] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
@@ -38,22 +38,15 @@ function App() {
           {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </MobileMenuButton>
         
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <MobileNavLinks
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <NavLink onClick={() => setMobileMenuOpen(false)}>Accueil</NavLink>
-              <NavLink onClick={() => setMobileMenuOpen(false)}>Fonctionnalités</NavLink>
-              <NavLink onClick={() => setMobileMenuOpen(false)}>Tarifs</NavLink>
-              <NavLink onClick={() => setMobileMenuOpen(false)}>À propos</NavLink>
-              <NavButton onClick={() => setMobileMenuOpen(false)}>Commencer</NavButton>
-            </MobileNavLinks>
-          )}
-        </AnimatePresence>
+        {mobileMenuOpen && (
+          <MobileNavLinks>
+            <NavLink onClick={() => setMobileMenuOpen(false)}>Accueil</NavLink>
+            <NavLink onClick={() => setMobileMenuOpen(false)}>Fonctionnalités</NavLink>
+            <NavLink onClick={() => setMobileMenuOpen(false)}>Tarifs</NavLink>
+            <NavLink onClick={() => setMobileMenuOpen(false)}>À propos</NavLink>
+            <NavButton onClick={() => setMobileMenuOpen(false)}>Commencer</NavButton>
+          </MobileNavLinks>
+        )}
       </Navbar>
       
       <Hero>
@@ -171,8 +164,8 @@ function App() {
 const Container = styled.div`
   max-width: 100%;
   min-height: 100vh;
-  background-color: var(--background-dark);
-  color: var(--text-light);
+  background-color: #101114;
+  color: #FFFFFF;
 `;
 
 const Navbar = styled.nav`
@@ -207,16 +200,14 @@ const LogoImage = styled.img`
 const Logo = styled.div`
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: #F2D049;
 `;
 
-const NavLinks = styled.div`
+const DesktopNavLinks = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
-`;
-
-const DesktopNavLinks = styled(NavLinks)`
+  
   @media (max-width: 768px) {
     display: none;
   }
@@ -225,7 +216,7 @@ const DesktopNavLinks = styled(NavLinks)`
 const MobileMenuButton = styled.button`
   background: none;
   border: none;
-  color: var(--text-light);
+  color: white;
   cursor: pointer;
   display: none;
   
@@ -234,40 +225,35 @@ const MobileMenuButton = styled.button`
   }
 `;
 
-const MobileNavLinks = styled(motion.div)`
+const MobileNavLinks = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: var(--background-dark);
+  background-color: #101114;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem 2rem;
+  padding: 1.5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  
-  ${NavLink}, ${NavButton} {
-    width: 100%;
-    text-align: center;
-    padding: 0.7rem;
-  }
+  z-index: 10;
 `;
 
 const NavLink = styled.a`
-  color: var(--text-medium);
+  color: #E0E0E0;
   text-decoration: none;
   font-weight: 500;
   cursor: pointer;
-  transition: color 0.3s ease;
+  padding: 0.5rem;
   
   &:hover {
-    color: var(--primary-color);
+    color: #F2D049;
   }
 `;
 
 const NavButton = styled.button`
-  background-color: var(--primary-color);
-  color: var(--background-dark);
+  background-color: #F2D049;
+  color: #101114;
   border: none;
   border-radius: 4px;
   padding: 0.5rem 1.5rem;
@@ -276,9 +262,8 @@ const NavButton = styled.button`
   transition: all 0.3s ease;
   
   &:hover {
-    background-color: var(--primary-dark);
+    background-color: #DAB82C;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(242, 208, 73, 0.3);
   }
 `;
 
@@ -326,7 +311,7 @@ const TextAnimation = styled.h1`
   margin-bottom: 1.5rem;
   
   .dynamic-text {
-    color: var(--primary-color);
+    color: #F2D049;
   }
   
   @media (max-width: 1024px) {
@@ -335,24 +320,33 @@ const TextAnimation = styled.h1`
   
   @media (max-width: 480px) {
     font-size: 2.2rem;
+    gap: 0.2rem;
   }
 `;
 
 const StaticText = styled.span`
-  color: var(--text-light);
+  color: #FFFFFF;
 `;
 
 const HeroSubtitle = styled.h2`
   font-size: 1.5rem;
-  color: var(--text-medium);
+  color: #E0E0E0;
   margin-bottom: 1.5rem;
+  
+  @media (max-width: 480px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const HeroDescription = styled.p`
   font-size: 1.1rem;
-  color: var(--text-muted);
+  color: #9CA3AF;
   margin-bottom: 2rem;
   line-height: 1.6;
+  
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const ButtonGroup = styled.div`
@@ -370,8 +364,8 @@ const ButtonGroup = styled.div`
 `;
 
 const PrimaryButton = styled.button`
-  background-color: var(--primary-color);
-  color: var(--background-dark);
+  background-color: #F2D049;
+  color: #101114;
   border: none;
   border-radius: 4px;
   padding: 0.8rem 2rem;
@@ -381,16 +375,15 @@ const PrimaryButton = styled.button`
   transition: all 0.3s ease;
   
   &:hover {
-    background-color: var(--primary-dark);
+    background-color: #DAB82C;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(242, 208, 73, 0.3);
   }
 `;
 
 const SecondaryButton = styled.button`
   background-color: transparent;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  color: #F2D049;
+  border: 1px solid #F2D049;
   border-radius: 4px;
   padding: 0.8rem 2rem;
   font-weight: 600;
@@ -399,7 +392,7 @@ const SecondaryButton = styled.button`
   transition: all 0.3s ease;
   
   &:hover {
-    background-color: var(--primary-light);
+    background-color: rgba(242, 208, 73, 0.15);
     transform: translateY(-2px);
   }
 `;
@@ -444,7 +437,7 @@ const HeroImage = styled.img`
 
 const Features = styled.section`
   padding: 7rem 4rem;
-  background-color: var(--background-medium);
+  background-color: #181a20;
   position: relative;
   
   &::before {
@@ -454,7 +447,7 @@ const Features = styled.section`
     left: 0;
     width: 100%;
     height: 100px;
-    background: linear-gradient(to top, var(--background-medium), transparent);
+    background: linear-gradient(to top, #181a20, transparent);
   }
   
   @media (max-width: 768px) {
@@ -468,7 +461,7 @@ const Features = styled.section`
 
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
-  color: var(--text-light);
+  color: #FFFFFF;
   text-align: center;
   margin-bottom: 3.5rem;
   position: relative;
@@ -481,7 +474,7 @@ const SectionTitle = styled.h2`
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background-color: var(--primary-color);
+    background-color: #F2D049;
     border-radius: 2px;
   }
   
@@ -503,7 +496,7 @@ const FeatureGrid = styled.div`
 `;
 
 const FeatureCard = styled.div`
-  background-color: var(--background-light);
+  background-color: #21232c;
   border-radius: 10px;
   padding: 2.5rem 2rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -518,7 +511,7 @@ const FeatureCard = styled.div`
 const FeatureIconContainer = styled.div`
   width: 60px;
   height: 60px;
-  background-color: var(--primary-light);
+  background-color: rgba(242, 208, 73, 0.15);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -532,19 +525,23 @@ const FeatureIcon = styled.div`
 
 const FeatureTitle = styled.h3`
   font-size: 1.25rem;
-  color: var(--text-light);
+  color: #FFFFFF;
   margin-bottom: 1rem;
 `;
 
 const FeatureDescription = styled.p`
   font-size: 1rem;
-  color: var(--text-muted);
+  color: #9CA3AF;
   line-height: 1.6;
 `;
 
 const Footer = styled.footer`
-  background-color: var(--background-dark);
+  background-color: #101114;
   padding: 5rem 4rem 2rem;
+  
+  @media (max-width: 768px) {
+    padding: 3rem 2rem 1.5rem;
+  }
 `;
 
 const FooterContent = styled.div`
@@ -567,7 +564,7 @@ const FooterLogo = styled.div`
 const FooterLogoText = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: #F2D049;
 `;
 
 const FooterLinks = styled.div`
@@ -576,6 +573,11 @@ const FooterLinks = styled.div`
   
   @media (max-width: 768px) {
     flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
     gap: 2rem;
   }
 `;
@@ -587,20 +589,20 @@ const FooterLinkColumn = styled.div`
 `;
 
 const FooterLinkHeader = styled.h4`
-  color: var(--text-light);
+  color: #FFFFFF;
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 `;
 
 const FooterLink = styled.a`
-  color: var(--text-muted);
+  color: #9CA3AF;
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.3s ease;
   
   &:hover {
-    color: var(--primary-color);
+    color: #F2D049;
   }
 `;
 
@@ -611,8 +613,8 @@ const FooterBottom = styled.div`
 
 const Copyright = styled.p`
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: #9CA3AF;
   text-align: center;
 `;
 
-export default App
+export default SimpleApp
