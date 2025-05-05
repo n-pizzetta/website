@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+@media (max-width: 1024px) {
+  .Hero {
+    flex-direction: column;
+  }
+  
+  .TextAnimation {
+    font-size: 3rem;
+  }
+  
+  .HeroImageWrapper {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .Navbar {
+    padding: 1rem 2rem;
+  }
+  
+  .NavLinks {
+    display: none;
+  }
+  
+  .Hero {
+    padding: 3rem 2rem;
+  }
+  
+  .TextAnimation {
+    font-size: 2.5rem;
+  }
+  
+  .FeatureGrid {
+    grid-template-columns: 1fr;
+  }
+}
